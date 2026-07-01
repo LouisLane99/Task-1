@@ -20,9 +20,9 @@ firewall_name = "allow-ssh-http"
 
 vm_name = "terraform-vm"
 
-machine_type = "e2-meduim"
+machine_type = "e2-smalls"
 
-zone = "us-central1-c"
+zone = "us-east1-b"
 
 image = "debian-cloud/debian-12"
 
