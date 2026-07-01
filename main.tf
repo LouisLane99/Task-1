@@ -49,65 +49,6 @@ resource "google_compute_firewall" "allow_ssh_http"{
 
 #vm Provisioning
 
-resource "google_compute_instance" "vm"{
-
-    name = var.vm_name
-    machine_type = var.machine_type
-    zone = var.zone
-
-    tags = ["web-server"]
-
-    boot_disk{
-        initialize_params{
-            image= var.image
-            size = 20
-        }
-    }
-    network_interface{
-        subnetwork = google_compute_subnetwork.subnet.id
-        access_config{
-
-        }
-    }
-}
-
-resource "google_compute_resource_policy" "snapshot_policy"{
-
-    name = var.snapshot_policy_name
-    region = var.region
-
-    snapshot_schedule_policy {
-      
-      schedule{
-         
-         daily_schedule {
-           days_in_cycle = 1
-        start_time    = var.snapshot_start_time
-         }
-      }
-
-      retention_policy{
-        max_retention_days    = var.snapshot_retention_days
-      on_source_disk_delete = "KEEP_AUTO_SNAPSHOTS"
-
-      }
-      snapshot_properties {
-
-      guest_flush = true
-
-      storage_locations = [
-        var.region
-      ]
-    }
-    }
-}
 
 
-resource "google_compute_disk_resource_policy_attachment" "bootdisk_attachment" {
 
-  name = google_compute_resource_policy.snapshot_policy.name
-
-  disk = google_compute_instance.vm.boot_disk[0].source
-
-  zone = var.zone
-}

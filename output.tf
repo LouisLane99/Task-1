@@ -20,22 +20,3 @@ output "vm_name"{
 }
 
 
-output "snapshot_policy_name" {
-  description = "Snapshot policy name"
-  value       = google_compute_resource_policy.snapshot_policy.name
-}
-
-output "snapshot_policy_region" {
-  description = "Region where the snapshot policy is created"
-  value       = google_compute_resource_policy.snapshot_policy.region
-}
-
-output "snapshot_retention_days" {
-  description = "Number of days snapshots are retained"
-  value       = var.snapshot_retention_days
-}
-
-output "snapshot_start_time" {
-  description = "Daily snapshot start time"
-  value       = var.snapshot_start_time
-}
